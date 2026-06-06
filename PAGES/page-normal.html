@@ -1,1 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MR³ NORMAL</title>
+</head>
+<body>
+    <h1>MR³ – NORMAL</h1>
+
+    <h2>STATE81</h2>
+    <pre id="state"></pre>
+
+    <h2>PHASE81</h2>
+    <pre id="phase"></pre>
+
+    <script>
+        // STATE
+        fetch("../STATE81/IKI-state81.json")
+            .then(r => r.json())
+            .then(d => {
+                document.getElementById("state").textContent =
+                    JSON.stringify(d, null, 4);
+            });
+
+        // PHASE
+        fetch("../PHASE81/IKI-phase81.json")
+            .then(r => r.json())
+            .then(d => {
+                document.getElementById("phase").textContent =
+                    JSON.stringify(d, null, 4);
+            });
+    </script>
+</body>
+</html>
 
