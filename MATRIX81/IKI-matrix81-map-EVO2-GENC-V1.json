@@ -1,1 +1,10 @@
+{
+    "module": "MATRIX81",
+    "version": "EVO2-GENC-V1",
+    "links": {
+        "data": "IKI-matrix81-data-EVO2-GENB-V1.json",
+        "profiles": "IKI-scan81-profiles-EVO2-GENB-V1.json"
+    },
+    "active": true
+}
 
