@@ -1,1 +1,22 @@
+{
+    "profiles": {
+        "mini": {
+            "scale": 0.8,
+            "active": true,
+            "label": "MINI-SCAN"
+        },
+        "normal": {
+            "scale": 1.0,
+            "active": true,
+            "label": "NORMAL-SCAN"
+        },
+        "maxi": {
+            "scale": 1.2,
+            "active": true,
+            "label": "MAXI-SCAN"
+        }
+    },
+    "version": "EVO2-GENB-V1",
+    "module": "scan81-profiles"
+}
 
