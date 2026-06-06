@@ -1,1 +1,22 @@
+{
+  "id": "IKI-SCAN81-PROFILES-EVO2-GENB-V1",
+  "phase": "ei",
+  "einstieg": "profiles",
+  "inhalt": "81",
+  "start": "start1",
+  "profiles": {
+    "mini": {
+      "scale": 0.8,
+      "active": true
+    },
+    "normal": {
+      "scale": 1.0,
+      "active": true
+    },
+    "maxi": {
+      "scale": 1.2,
+      "active": true
+    }
+  }
+}
 
