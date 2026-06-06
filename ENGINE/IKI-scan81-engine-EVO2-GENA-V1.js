@@ -1,18 +1,11 @@
-// IKI-SCAN81-ENGINE-EVO2-GENA-V1
-// Grund-Engine für Scan81
-
-const IKI_ENGINE = {
-  id: "IKI-SCAN81-ENGINE-EVO2-GENA-V1",
-  phase: "omelett",
-  einstieg: "engine",
-  inhalt: "scan81",
-  start: "start2",
-
-  init() {
-    console.log("ENGINE EVO2 GENA V1 aktiv");
-    return true;
-  }
+export const scan81 = {
+    version: "EVO2-GENA-V1",
+    active: true,
+    run(input) {
+        return {
+            scan: "OK",
+            input: input,
+            timestamp: Date.now()
+        };
+    }
 };
-
-IKI_ENGINE.init();
-
