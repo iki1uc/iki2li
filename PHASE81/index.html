@@ -1,1 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PHASE81</title>
+</head>
+<body>
+    <h1>PHASE81 – CORE-P81</h1>
+    <pre id="phase81"></pre>
+
+    <script>
+        fetch("IKI-phase81.json")
+            .then(r => r.json())
+            .then(data => {
+                document.getElementById("phase81").textContent =
+                    JSON.stringify(data, null, 4);
+            });
+    </script>
+</body>
+</html>
 
