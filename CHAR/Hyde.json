@@ -1,5 +1,17 @@
-{
-  "name": "Mr. Hyde",
-  "home": "/CHAR/",
-  "active": true
+// BAUARBEITER: Figur laden
+export async function loadChar(name) {
+    try {
+        const data = await fetch(`./CHAR/${name}.json`).then(r => r.json());
+        return {
+            ok: true,
+            name: data.name,
+            home: data.home,
+            active: data.active
+        };
+    } catch (err) {
+        return {
+            ok: false,
+            error: "Figur nicht gefunden"
+        };
+    }
 }
