@@ -2,39 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>PAGE-MINI</title>
-    <style>
-        body {
-            font-family: monospace;
-            padding: 20px;
-        }
-        pre {
-            background: #f0f0f0;
-            padding: 10px;
-            border-radius: 6px;
-        }
-    </style>
+    <title>MR³ MINI</title>
 </head>
 <body>
-
-    <h1>PAGE-MINI</h1>
-    <p>Mini-Ausgabe für schnelle Wahrheitsprüfung.</p>
-
-    <pre id="mini"></pre>
+    <h1>MR³ – MINI</h1>
+    <pre id="output"></pre>
 
     <script>
         fetch("../STATE81/IKI-state81.json")
             .then(r => r.json())
-            .then(data => {
-                document.getElementById("mini").textContent =
-                    JSON.stringify(data, null, 4);
-            })
-            .catch(() => {
-                document.getElementById("mini").textContent =
-                    "Keine Daten gefunden.";
+            .then(d => {
+                document.getElementById("output").textContent =
+                    JSON.stringify(d, null, 4);
             });
     </script>
-
 </body>
 </html>
-
