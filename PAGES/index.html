@@ -1,1 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>iki2li – USB RUN</title>
+</head>
+<body>
+    <h1>iki2li – USB System</h1>
+    <div id="respo">Lade RESPO…</div>
+
+    <script type="module">
+        import { scanEVO } from "./PAGES/scanner.js";
+        import { runToolomat } from "./PAGES/toolomat.js";
+        import { renderRespo } from "./PAGES/respo-view.js";
+
+        (async () => {
+            const evoScan = await scanEVO();
+            const toolResult = runToolomat(evoScan);
+            renderRespo(toolResult, "respo");
+            console.log("EVO-SCAN:", evoScan);
+            console.log("TOOLOMAT:", toolResult);
+        })();
+    </script>
+</body>
+</html>
 
