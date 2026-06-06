@@ -1,1 +1,12 @@
 
+{
+  "id": "IKI-MATRIX81-DATA-EVO2-GENB-V1",
+  "phase": "ei",
+  "einstieg": "matrix",
+  "inhalt": "81",
+  "start": "start1",
+  "matrix": {
+    "geo": ["mini", "normal", "maxi"],
+    "active": true
+  }
+}
