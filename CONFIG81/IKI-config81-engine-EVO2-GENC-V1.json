@@ -1,1 +1,11 @@
+{
+    "config": "ENGINE",
+    "version": "EVO2-GENC-V1",
+    "engine": {
+        "scan": "../ENGINE/IKI-scan81-engine-EVO2-GENA-V1.js",
+        "core": "../ENGINE/IKI-core81-EVO2-GENA-V1.html",
+        "ui": "../ENGINE/IKI-scan81-ui-EVO2-GENA-V1.html"
+    },
+    "active": true
+}
 
