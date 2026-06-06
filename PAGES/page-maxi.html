@@ -1,1 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MR³ MAXI</title>
+</head>
+<body>
+    <h1>MR³ – MAXI</h1>
+
+    <h2>STATE81</h2>
+    <pre id="state"></pre>
+
+    <h2>PHASE81</h2>
+    <pre id="phase"></pre>
+
+    <h2>ENGINE81</h2>
+    <pre id="engine"></pre>
+
+    <script>
+        // STATE
+        fetch("../STATE81/IKI-state81.json")
+            .then(r => r.json())
+            .then(d => {
+                document.getElementById("state").textContent =
+                    JSON.stringify(d, null, 4);
+            });
+
+        // PHASE
+        fetch("../PHASE81/IKI-phase81.json")
+            .then(r => r.json())
+            .then(d => {
+                document.getElementById("phase").textContent =
+                    JSON.stringify(d, null, 4);
+            });
+
+        // ENGINE
+        fetch("../ENGINE/IKI-engine81-map-EVO2-GENC-V1.json")
+            .then(r => r.json())
+            .then(d => {
+                document.getElementById("engine").textContent =
+                    JSON.stringify(d, null, 4);
+            });
+    </script>
+</body>
+</html>
 
