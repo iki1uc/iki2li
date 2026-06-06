@@ -1,5 +1,4 @@
 // SCANNER EVO – extended evolving version
-// Reads core system layers, extracts key values and returns a deep EVO object
 
 export async function scanEVO() {
     const result = {
@@ -12,19 +11,12 @@ export async function scanEVO() {
     };
 
     try {
-        // STATE81
-        const state = await fetch("../STATE81/IKI-state81.json").then(r => r.json());
-        result.layers.state = state;
+        const state = await fetch("./STATE81/IKI-state81.json").then(r => r.json());
+        const phase = await fetch("./PHASE81/IKI-phase81.json").then(r => r.json());
+        const engine = await fetch("./ENGINE/IKI-engine81-map-EVO2-GENC-V1.json").then(r => r.json());
 
-        // PHASE81
-        const phase = await fetch("../PHASE81/IKI-phase81.json").then(r => r.json());
-        result.layers.phase = phase;
+        result.layers = { state, phase, engine };
 
-        // ENGINE81 MAP
-        const engine = await fetch("../ENGINE/IKI-engine81-map-EVO2-GENC-V1.json").then(r => r.json());
-        result.layers.engine = engine;
-
-        // EXTRACTION LAYER – pulls key values
         result.extract = {
             state_value: state.state || null,
             phase_value: phase.phase || null,
@@ -33,17 +25,14 @@ export async function scanEVO() {
             engine_version: engine.version || null
         };
 
-        // EVO MERGE – deeper merge
         result.merge = {
             state_phase: `${state.state || "?"}-${phase.phase || "?"}`,
             engine_status: engine.active ? "running" : "idle",
-            combined_hash: btoa(
-                JSON.stringify({
-                    s: state.state,
-                    p: phase.phase,
-                    e: engine.mode
-                })
-            )
+            combined_hash: btoa(JSON.stringify({
+                s: state.state,
+                p: phase.phase,
+                e: engine.mode
+            }))
         };
 
         result.status = "ok";
