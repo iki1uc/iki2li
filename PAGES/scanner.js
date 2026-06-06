@@ -1,11 +1,14 @@
-// SCANNER EVO – minimal evolving version
-// Reads core system layers and returns a combined EVO object
+// SCANNER EVO – extended evolving version
+// Reads core system layers, extracts key values and returns a deep EVO object
 
 export async function scanEVO() {
     const result = {
         evo: true,
         timestamp: Date.now(),
-        layers: {}
+        layers: {},
+        extract: {},
+        merge: {},
+        status: "init"
     };
 
     try {
@@ -21,13 +24,26 @@ export async function scanEVO() {
         const engine = await fetch("../ENGINE/IKI-engine81-map-EVO2-GENC-V1.json").then(r => r.json());
         result.layers.engine = engine;
 
-        // EVO‑MERGE
+        // EXTRACTION LAYER – pulls key values
+        result.extract = {
+            state_value: state.state || null,
+            phase_value: phase.phase || null,
+            engine_mode: engine.mode || null,
+            engine_active: engine.active || false,
+            engine_version: engine.version || null
+        };
+
+        // EVO MERGE – deeper merge
         result.merge = {
-            state_phase: {
-                state: state.state || null,
-                phase: phase.phase || null
-            },
-            engine_active: engine.active || false
+            state_phase: `${state.state || "?"}-${phase.phase || "?"}`,
+            engine_status: engine.active ? "running" : "idle",
+            combined_hash: btoa(
+                JSON.stringify({
+                    s: state.state,
+                    p: phase.phase,
+                    e: engine.mode
+                })
+            )
         };
 
         result.status = "ok";
@@ -38,4 +54,3 @@ export async function scanEVO() {
 
     return result;
 }
-
