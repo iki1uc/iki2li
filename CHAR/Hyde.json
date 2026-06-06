@@ -1,17 +1,24 @@
-// BAUARBEITER: Figur laden
 export async function loadChar(name) {
     try {
-        const data = await fetch(`./CHAR/${name}.json`).then(r => r.json());
+        const res = await fetch(`./CHAR/${name}.json`);
+        if (!res.ok) return { ok: false, error: "Datei nicht gefunden" };
+
+        const data = await res.json();
+
+        if (!data.name || !data.home || !data.core) {
+            return { ok: false, error: "Pflichtfelder fehlen" };
+        }
+
         return {
             ok: true,
+            id: data.id,
             name: data.name,
             home: data.home,
-            active: data.active
+            active: data.active ?? false,
+            core: data.core
         };
+
     } catch (err) {
-        return {
-            ok: false,
-            error: "Figur nicht gefunden"
-        };
+        return { ok: false, error: err.toString() };
     }
 }
