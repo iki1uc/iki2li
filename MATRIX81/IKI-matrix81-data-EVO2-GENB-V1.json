@@ -1,12 +1,29 @@
-
 {
-  "id": "IKI-MATRIX81-DATA-EVO2-GENB-V1",
-  "phase": "ei",
-  "einstieg": "matrix",
-  "inhalt": "81",
-  "start": "start1",
-  "matrix": {
-    "geo": ["mini", "normal", "maxi"],
-    "active": true
-  }
+    "module": "LOG81",
+    "version": "EVO2-GENC-V1",
+    "active": true,
+
+    "events": [
+        {
+            "id": "LOG81-START",
+            "type": "system",
+            "message": "LOG81 initialisiert",
+            "timestamp": "2026-06-06T20:40:00Z",
+            "status": "ok"
+        },
+        {
+            "id": "LOG81-CONFIG-LOAD",
+            "type": "config",
+            "message": "CONFIG81 erfolgreich geladen",
+            "timestamp": "2026-06-06T20:40:01Z",
+            "status": "ok"
+        },
+        {
+            "id": "LOG81-ENGINE-LOAD",
+            "type": "engine",
+            "message": "ENGINE81 erfolgreich aktiviert",
+            "timestamp": "2026-06-06T20:40:02Z",
+            "status": "ok"
+        }
+    ]
 }
