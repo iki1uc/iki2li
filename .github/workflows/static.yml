@@ -1,36 +1,22 @@
-// EVO Toolator – legal activation code
-// Builds the 1→3→6→12→48 chain from internal JSON files only
+name: EVO Toolator
 
-export async function evoToolator() {
-    const out = {
-        activated: true,
-        timestamp: Date.now(),
-        evo: {}
-    };
+on:
+  push:
+    branches:
+      - main
 
-    // 1 → STATE
-    const state = await fetch("../STATE81/IKI-state81.json").then(r => r.json());
-    out.evo.state = state;
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-    // 3 → PROFILES (mini, normal, maxi)
-    const profiles = await fetch("../PROFILES81/IKI-profiles81.json").then(r => r.json());
-    out.evo.profiles = profiles;
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    // 6 → STATE + PHASE
-    const phase = await fetch("../PHASE81/IKI-phase81.json").then(r => r.json());
-    out.evo.phase = phase;
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
-    // 12 → ENGINE
-    const engine = await fetch("../ENGINE/IKI-engine81-map-EVO2-GENC-V1.json").then(r => r.json());
-    out.evo.engine = engine;
-
-    // 48 → EVO MERGE
-    out.evo.merge48 = {
-        state,
-        phase,
-        engine,
-        profiles
-    };
-
-    return out;
-}
+      - name: Run EVO Toolator
+        run: node PAGES/evo-toolator.js
