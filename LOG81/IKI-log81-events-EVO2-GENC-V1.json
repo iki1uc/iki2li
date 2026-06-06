@@ -1,1 +1,15 @@
+{
+  "id": "IKI-LOG81-EVENTS-EVO2-GENC-V1",
+  "phase": "satt",
+  "einstieg": "log",
+  "inhalt": "events",
+  "start": "start2",
+  "events": [
+    {
+      "type": "system",
+      "message": "LOG81 initialisiert",
+      "status": "ok"
+    }
+  ]
+}
 
