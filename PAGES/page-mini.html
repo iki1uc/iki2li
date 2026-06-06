@@ -1,1 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PAGE-MINI</title>
+    <style>
+        body {
+            font-family: monospace;
+            padding: 20px;
+        }
+        pre {
+            background: #f0f0f0;
+            padding: 10px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>PAGE-MINI</h1>
+    <p>Mini-Ausgabe für schnelle Wahrheitsprüfung.</p>
+
+    <pre id="mini"></pre>
+
+    <script>
+        fetch("../STATE81/IKI-state81.json")
+            .then(r => r.json())
+            .then(data => {
+                document.getElementById("mini").textContent =
+                    JSON.stringify(data, null, 4);
+            })
+            .catch(() => {
+                document.getElementById("mini").textContent =
+                    "Keine Daten gefunden.";
+            });
+    </script>
+
+</body>
+</html>
 
