@@ -1,4 +1,25 @@
-<body data-iki="phase:ei; einstieg:ui; inhalt:overview; start:start1;">
-  UI – Übersicht aktiv
-</body>
+<div id="scan-output" style="
+    padding:20px;
+    background:#111;
+    color:#fff;
+    font-size:18px;
+    border:1px solid #555;
+    white-space:pre-wrap;
+    border-radius:6px;
+    margin-bottom:20px;
+">
+    SCAN81 // waiting…
+</div>
 
+<script type="module">
+import { scanEVO } from "./SCAN81/scanEVO.js";
+
+async function runScan() {
+    const result = await scanEVO();
+    document.getElementById("scan-output").textContent =
+        JSON.stringify(result, null, 2);
+}
+
+runScan();
+setInterval(runScan, 1500);
+</script>
