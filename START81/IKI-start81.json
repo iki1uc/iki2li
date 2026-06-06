@@ -1,1 +1,12 @@
-
+{
+    "start81": true,
+    "version": "EVO2-GENA-V1",
+    "active": true,
+    "entry": {
+        "default": "../PAGES/page-main.html",
+        "mini": "../PAGES/page-mini.html",
+        "normal": "../PAGES/page-normal.html",
+        "maxi": "../PAGES/page-maxi.html"
+    },
+    "timestamp": "init"
+}
