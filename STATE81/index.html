@@ -1,1 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>STATE81</title>
+</head>
+<body>
+    <h1>STATE81 – CORE-81</h1>
+    <pre id="state81"></pre>
+
+    <script>
+        fetch("IKI-state81.json")
+            .then(r => r.json())
+            .then(data => {
+                document.getElementById("state81").textContent =
+                    JSON.stringify(data, null, 4);
+            });
+    </script>
+</body>
+</html>
 
