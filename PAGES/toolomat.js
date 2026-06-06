@@ -1,27 +1,23 @@
-// TOOLOMAT – nimmt EVO-Scan und baut ein Tool-Resultat
-export function runToolomat(evoScan) {
-    if (evoScan.status !== "ok") {
-        return {
-            ok: false,
-            reason: evoScan.error || "scan failed"
-        };
+// RESPO-VIEW – bildet Wissen ab (iki2li)
+export function renderRespo(result, containerId = "respo") {
+    const el = document.getElementById(containerId);
+    if (!el) return;
+
+    if (!result.ok) {
+        el.innerHTML = `<p>RESPO: Fehler – ${result.reason}</p>`;
+        return;
     }
 
-    const { extract, merge } = evoScan;
+    const s = result.summary;
+    const f = result.flags;
 
-    return {
-        ok: true,
-        summary: {
-            state: extract.state_value,
-            phase: extract.phase_value,
-            engine: extract.engine_mode,
-            engine_status: merge.engine_status
-        },
-        flags: {
-            isReady:  extract.engine_active === true,
-            isIdle:   merge.engine_status === "idle",
-            isActive: merge.engine_status === "running"
-        }
-    };
+    el.innerHTML = `
+        <h2>RESPO / iki2li – Systemstatus</h2>
+        <p><b>State:</b> ${s.state}</p>
+        <p><b>Phase:</b> ${s.phase}</p>
+        <p><b>Engine:</b> ${s.engine} (${s.engine_status})</p>
+        <p><b>Ready:</b> ${f.isReady}</p>
+        <p><b>Active:</b> ${f.isActive}</p>
+        <p><b>Idle:</b> ${f.isIdle}</p>
+    `;
 }
-
