@@ -1,1 +1,12 @@
+{
+  "id": "IKI-CONFIG81-SYSTEM-EVO2-GENC-V1",
+  "phase": "ei",
+  "einstieg": "config",
+  "inhalt": "81",
+  "start": "start1",
+  "system": {
+    "version": "EVO2-GENC",
+    "active": true
+  }
+}
 
