@@ -1,159 +1,38 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-<meta charset="UTF-8">
-<title>IKI ROOT INDEX</title>
-
-<!-- MINI/MAXI + AUTO-FIT BASIS -->
-<style>
-    body.mini { font-size: 20px; line-height: 1.3; }
-    body.maxi { font-size: 38px; line-height: 1.4; transform: scale(1.05); }
-
-    .auto-fit {
-        display: block;
-        width: 100%;
-        font-size: inherit;
-        line-height: inherit;
-        white-space: normal;
-    }
-
-    /* Allgemeine Box-Styles */
-    .box {
-        padding: 20px;
-        margin-bottom: 20px;
-        border-radius: 6px;
-        font-family: Consolas, monospace;
-        transition: all 0.2s ease-in-out;
-    }
-
-    #system-outfit { background:#000; color:#0ff; border:3px solid #0ff; }
-    #king-box      { background:#111; color:#0f0; border:2px solid #0f0; }
-    #officer-box   { background:#000; color:#0ff; border:2px solid #0ff; }
-    #scanner-outfit{ background:#000; color:#0ff; border:3px solid #0ff; }
-    #scan-output   { background:#111; color:#fff; border:1px solid #555; white-space:pre-wrap; }
-    #axis-live     { background:#111; color:#0f0; border:2px solid #0f0; }
-</style>
-
-</head>
-<body class="mini">
-
-<!-- MINI/MAXI BUTTON -->
-<button onclick="toggleMode()" style="padding:10px 20px; margin-bottom:20px;">
-    MODE: MINI / MAXI
-</button>
-
-<!-- 1) SYSTEM-OUTFIT -->
-<div id="system-outfit" class="box auto-fit">
-    IKI‑ROOT // Handler: iki1uc (Ridvan)<br>
-    System: SCAN81 EVO2 GENA V1<br>
-    Protokoll: ALT WEG → NEU REIN
-</div>
-
-<!-- 2) UI-KING -->
-<div id="king-box" class="box auto-fit">
-    UI‑KING // Operation aktiv<br>
-    Modus: MINI/MAXI kompatibel<br>
-    Handler: iki1uc (Ridvan)
-</div>
-
-<!-- 3) UI-OFFICER -->
-<div id="officer-box" class="box auto-fit">
-    UI‑OFFICER // Scan bereit<br>
-    Protokoll: ALT WEG → NEU REIN<br>
-    Handler: iki1uc (Ridvan)
-</div>
-
-<!-- 4) SCANNER-OUTFIT -->
-<div id="scanner-outfit" class="box auto-fit">
-    SCAN81 EVO2 GENA V1<br>
-    UI‑SCANNER // Handler: iki1uc (Ridvan)<br>
-    Modus: EVO‑Extended
-</div>
-
-<!-- 5) SCAN-OUTPUT -->
-<div id="scan-output" class="box auto-fit">
-    SCAN81 // waiting…
-</div>
-
-<!-- 6) AXIS-LIVE -->
-<div id="axis-live" class="box auto-fit">
-    <b>AXIS‑LIVE // 14‑Achsen‑Modus</b>
-    <pre id="axis-output">initializing…</pre>
-</div>
-
-<!-- MINI/MAXI SCRIPT -->
 <script>
-let mode = "mini";
-function toggleMode() {
-    mode = (mode === "mini") ? "maxi" : "mini";
-    document.body.className = mode;
+const engine = document.getElementById('engine');
+
+let masterX = 0;   // Forward/Rew-Achse
+let followerY = 0; // Layer
+let followerZ = 0; // Zoom
+
+engine.focus(); // wichtig: Fokus auf den Container legen
+
+engine.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight') {
+    e.preventDefault();
+    stepForward();
+  }
+  if (e.key === 'ArrowLeft') {
+    e.preventDefault();
+    stepRewind();
+  }
+});
+
+function stepForward() {
+  masterX += 1;
+  followerY += 0.2;
+  followerZ += 0.1;
+  updateEngine();
+}
+
+function stepRewind() {
+  masterX -= 1;
+  followerY -= 0.2;
+  followerZ -= 0.1;
+  updateEngine();
+}
+
+function updateEngine() {
+  console.log('X:', masterX, 'Y:', followerY, 'Z:', followerZ);
 }
 </script>
-
-<!-- AUTO-FIT SCRIPT -->
-<script>
-function autoFitText(el) {
-    const maxHeight = el.offsetHeight;
-    const maxWidth = el.offsetWidth;
-    let size = parseInt(window.getComputedStyle(el).fontSize);
-
-    while ((el.scrollHeight > maxHeight || el.scrollWidth > maxWidth) && size > 10) {
-        size--;
-        el.style.fontSize = size + "px";
-    }
-}
-
-function applyAutoFit() {
-    document.querySelectorAll(".auto-fit").forEach(el => autoFitText(el));
-}
-
-window.addEventListener("load", applyAutoFit);
-window.addEventListener("resize", applyAutoFit);
-</script>
-
-<!-- AXIS-LIVE SCRIPT -->
-<script>
-let axis = {
-    x: 0, y: 0, z: 0,
-    a: 0, b: 0, c: 0,
-    r1: 0, r2: 0, r3: 0,
-    v1: 0, v2: 0, v3: 0,
-    core: 81
-};
-
-function updateAxis() {
-    axis.x += 1;
-    axis.y += 2;
-    axis.z += 3;
-
-    axis.r1 = (axis.r1 + 5) % 360;
-    axis.r2 = (axis.r2 + 3) % 360;
-    axis.r3 = (axis.r3 + 7) % 360;
-
-    axis.v1 = Math.random().toFixed(3);
-    axis.v2 = Math.random().toFixed(3);
-    axis.v3 = Math.random().toFixed(3);
-
-    document.getElementById("axis-output").textContent =
-        JSON.stringify(axis, null, 2);
-}
-
-setInterval(updateAxis, 200);
-</script>
-
-<!-- SCANNER EVO SCRIPT -->
-<script type="module">
-import { scanEVO } from "./SCAN81/scanEVO.js";
-
-async function runScan() {
-    const result = await scanEVO();
-    document.getElementById("scan-output").textContent =
-        JSON.stringify(result, null, 2);
-}
-
-runScan();
-setInterval(runScan, 1500);
-</script>
-
-</body>
-</html>
