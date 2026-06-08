@@ -5,12 +5,25 @@
   <title>Kandidat Index</title>
 </head>
 <body>
-  <h1>Kandidat: {{respo}}</h1>
-  <p>Base: {{base}}</p>
-  <p>Line: L(n)=3n</p>
-  <p>Instance: I(n)=base+3n</p>
-  <p>Axis: A(n)=floor(n/3)+1</p>
+  <h1 id="kandidat-respo">Kandidat: …</h1>
+  <p id="kandidat-base">Base: …</p>
 
-  <a href="id.html">→ zur ID‑Ansicht</a>
+  <hr>
+
+  <h2>Dreieck‑Verbund (2× Winkel)</h2>
+  <div id="triangle-status" style="font-family:monospace;"></div>
+
+  <script type="module">
+    import { trianglePrep } from "./kiq/triangle-prep.js";
+
+    const tri = trianglePrep();
+
+    document.getElementById("triangle-status").innerHTML = `
+Winkel 1: ${tri.w1}°  
+Winkel 2: ${tri.w2}°  
+Summe:   ${tri.w1 + tri.w2}°  
+Dreieck möglich: ${tri.valid ? "JA" : "NEIN"}
+    `;
+  </script>
 </body>
 </html>
