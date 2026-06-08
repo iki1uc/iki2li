@@ -1,10 +1,29 @@
-module:
-  name: "iki2li"
+seeu:
+  module: "iki2li"
   role: "IDENTITAET"
   share: 0.33
+
+geometry:
+  primary: "quadrat"
+  subforms:
+    - "dreieck_1"
+    - "dreieck_2"
+
+quadrat:
+  points: [R1, R2, R3, R4]
+  triangles:
+    - [R1, R2, R3]
+    - [R1, R3, R4]
+
+respo:
+  layout: "golden_quarter"
+  satellites:
+    - { id: R1, angle: 0 }
+    - { id: R2, angle: 126 }
+    - { id: R3, angle: 180 }
+    - { id: R4, angle: 306 }
 
 technik:
   formula_fragment: "v_iki2li / 3"
   operator_fragment: "1 - v_iki2li"
   bind_fragment: "iki2li hält Seiten-Seil"
-  question: "Willst du diesen 33%-Teil aktivieren?"
