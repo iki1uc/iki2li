@@ -1,10 +1,11 @@
-// triangle-prep.js – liefert 2 vorbereitete Winkel für index.html
-
+// triangle-prep.js
 export function trianglePrep() {
+    const T = window.KIQ?.TRIANGLE || { A:0, B:0, valid:false };
+
     return {
-        w1: window.KIQ?.WINKEL?.A || 0,   // erster Winkel
-        w2: window.KIQ?.WINKEL?.B || 0,   // zweiter Winkel
-        valid: (window.KIQ?.WINKEL?.A + window.KIQ?.WINKEL?.B) < 180
+        w1: T.A,
+        w2: T.B,
+        sum: T.A + T.B,
+        valid: T.valid
     };
 }
-
