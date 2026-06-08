@@ -1,29 +1,29 @@
-<script type="module">
-  import { triangleBeam } from "./kiq/triangle-beam.js";
-  import { trianglePrep } from "./kiq/triangle-prep.js";
-  import { idState } from "./kiq/id-state.js";
-  import { identVector } from "./kiq/ident-vector.js";
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>INDEX – 81(1)</title>
 
-  triangleBeam();
+  <script src="/js/js-yaml.min.js"></script>
 
-  const tri = trianglePrep();
-  const id = idState();
-  const ident = identVector();
+  <script type="module">
+    import { generator } from "/br/generator.js";
+    import { borgVerify } from "/br/borg_verify.js";
+    import { borgAutoScan } from "/br/borg_autoscan.js";
 
-  document.getElementById("triangle-status").innerHTML = `
-Winkel A: ${tri.w1}°
-Winkel B: ${tri.w2}°
-Summe:   ${tri.sum}°
-Dreieck: ${tri.valid ? "JA" : "NEIN"}
-IDENT‑Vektor: [${ident.vector[0]}, ${ident.vector[1]}]
-  `;
+    window.onload = async () => {
 
-  document.getElementById("id-status").innerHTML = `
-ID:       ${id.id}
-Axis:     ${id.axis}
-Instance: ${id.instance}
-Base:     ${id.base}
-Winkel‑Summe: ${ident.sum}
-IDENT‑Vektor: [${ident.vector[0]}, ${ident.vector[1]}]
-  `;
-</script>
+      const data = await generator();      // Aufstellung 81(1)
+      const htmlScan = borgAutoScan();     // HTML-Material
+      const verify = await borgVerify(data, htmlScan);
+
+      document.getElementById("out").textContent =
+        JSON.stringify({ data, htmlScan, verify }, null, 2);
+    };
+  </script>
+</head>
+
+<body>
+  <pre id="out"></pre>
+</body>
+</html>
