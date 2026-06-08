@@ -16,11 +16,11 @@ document.getElementById("king-btn").onclick = () => {
             border:2px solid #0f0;
             margin-bottom:20px;
         ">
-            KING‑PROTOKOLL  
-            <br> Ausgeführt: ${res.executed}
-            <br> Pixel/Achsen: ${res.validation.stats.pixelCount} / ${res.validation.stats.axisCount}
-            <br> Issues: ${res.validation.issues.join(", ") || "Keine"}
-            <br> Output: ${JSON.stringify(res.result)}
+            KING‑PROTOKOLL AKTIV<br>
+            Ausgeführt: ${res.executed}<br>
+            Pixel/Achsen: ${res.stats.pixelCount} / ${res.stats.axisCount}<br>
+            Issues: ${res.issues.join(", ") || "Keine"}<br>
+            Output: ${JSON.stringify(res.output)}
         </div>
     `;
 };
