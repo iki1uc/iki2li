@@ -5,23 +5,24 @@
   <title>Kandidat Index</title>
 </head>
 <body>
-  <h1 id="kandidat-respo">Kandidat: …</h1>
-  <p id="kandidat-base">Base: …</p>
+  <h1>Dreieck‑Verbund</h1>
 
-  <hr>
-
-  <h2>Dreieck‑Verbund (2× Winkel)</h2>
   <div id="triangle-status" style="font-family:monospace;"></div>
 
   <script type="module">
+    import { triangleBeam } from "./kiq/triangle-beam.js";
     import { trianglePrep } from "./kiq/triangle-prep.js";
 
+    // 3×X Pipeline starten
+    triangleBeam();
+
+    // vorbereitete Daten holen
     const tri = trianglePrep();
 
     document.getElementById("triangle-status").innerHTML = `
-Winkel 1: ${tri.w1}°  
-Winkel 2: ${tri.w2}°  
-Summe:   ${tri.w1 + tri.w2}°  
+Winkel A: ${tri.w1}°  
+Winkel B: ${tri.w2}°  
+Summe:   ${tri.sum}°  
 Dreieck möglich: ${tri.valid ? "JA" : "NEIN"}
     `;
   </script>
