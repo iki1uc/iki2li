@@ -1,7 +1,10 @@
-respo: "Q3"
-id_op: "Q3"
-base: 3
+module:
+  name: "iki2li"
+  role: "IDENTITAET"
+  share: 0.33
 
-line: "L(n)=3n"
-instance: "I(n)=base+3n"
-axis: "A(n)=floor(n/3)+1"
+technik:
+  formula_fragment: "v_iki2li / 3"
+  operator_fragment: "1 - v_iki2li"
+  bind_fragment: "iki2li hält Seiten-Seil"
+  question: "Willst du diesen 33%-Teil aktivieren?"
