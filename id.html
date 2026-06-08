@@ -1,25 +1,29 @@
-<script type="module">
-  import { idState } from "./kiq/id-state.js";
-  import { trianglePrep } from "./kiq/triangle-prep.js";
-  import { identVector } from "./kiq/ident-vector.js";
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ID – 81</title>
 
-  const id = idState();
-  const tri = trianglePrep();
-  const ident = identVector();
+  <script src="/js/js-yaml.min.js"></script>
 
-  document.getElementById("id-status").innerHTML = `
-ID:       ${id.id}
-Axis:     ${id.axis}
-Instance: ${id.instance}
-Base:     ${id.base}
-IDENT‑Vektor: [${ident.vector[0]}, ${ident.vector[1]}]
-  `;
+  <script type="module">
+    import { generator } from "/br/generator.js";
+    import { borgVerify } from "/br/borg_verify.js";
+    import { borgAutoScan } from "/br/borg_autoscan.js";
 
-  document.getElementById("triangle-status").innerHTML = `
-Winkel A: ${tri.w1}°
-Winkel B: ${tri.w2}°
-Summe:    ${tri.sum}°
-Dreieck:  ${tri.valid ? "JA" : "NEIN"}
-IDENT‑Vektor: [${ident.vector[0]}, ${ident.vector[1]}]
-  `;
-</script>
+    window.onload = async () => {
+
+      const data = await generator();      // Aufstellung 81
+      const htmlScan = borgAutoScan();     // HTML-Material
+      const verify = await borgVerify(data, htmlScan);
+
+      document.getElementById("out").textContent =
+        JSON.stringify({ data, htmlScan, verify }, null, 2);
+    };
+  </script>
+</head>
+
+<body>
+  <pre id="out"></pre>
+</body>
+</html>
