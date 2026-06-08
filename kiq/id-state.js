@@ -1,4 +1,4 @@
-// id-state.js – liefert ID-Daten für index.html
+// id-state.js – liefert ID-Daten für id.html und index.html
 
 export function idState() {
     return {
