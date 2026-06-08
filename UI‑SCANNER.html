@@ -1,5 +1,26 @@
-<div id="UI-SCANNER"
-     data-iki="phase:omelett; einstieg:ui; inhalt:scanner; start:start2;">
-  <div data-iki="scan:result">Noch kein Scan</div>
-</div>
-<script src="IKI-scan81-engine-EVO2-GENA-V1.js"></script>
+<script type="module">
+import { VECTOR_SCANNER } from "./kiq/vector-scanner.js";
+import { scanData } from "./kiq/mock-scan.js";
+
+const ui = document.querySelector('[data-iki="scan:result"]');
+
+document.getElementById("UI-SCANNER").onclick = () => {
+    // Beispiel: 3 Punkte aus dem Scan
+    const p1 = scanData.points[0];
+    const p2 = scanData.points[1];
+    const p3 = scanData.points[2];
+
+    const vA = VECTOR_SCANNER.toVector(p1, p2);
+    const vB = VECTOR_SCANNER.toVector(p2, p3);
+    const vC = VECTOR_SCANNER.toVector(p3, p1);
+
+    const triangle = VECTOR_SCANNER.triangle(vA, vB, vC);
+
+    ui.innerHTML = `
+        <b>Vektoring aktiv</b><br>
+        AB: ${triangle.AB.toFixed(2)}°<br>
+        BC: ${triangle.BC.toFixed(2)}°<br>
+        CA: ${triangle.CA.toFixed(2)}°
+    `;
+};
+</script>
