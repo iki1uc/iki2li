@@ -9,21 +9,39 @@
 
   <div id="triangle-status" style="font-family:monospace;"></div>
 
+  <hr>
+
+  <h2>ID‑Daten</h2>
+  <div id="id-status" style="font-family:monospace;"></div>
+
   <script type="module">
     import { triangleBeam } from "./kiq/triangle-beam.js";
     import { trianglePrep } from "./kiq/triangle-prep.js";
+    import { idState } from "./kiq/id-state.js";
 
-    // 3×X Pipeline starten
+    // 3×X Pipeline starten (Domino → Signal → Beam)
     triangleBeam();
 
-    // vorbereitete Daten holen
+    // 1) Winkel holen
     const tri = trianglePrep();
 
+    // 2) ID-Daten holen
+    const id = idState();
+
+    // 3) Dreieck anzeigen
     document.getElementById("triangle-status").innerHTML = `
 Winkel A: ${tri.w1}°  
 Winkel B: ${tri.w2}°  
 Summe:   ${tri.sum}°  
 Dreieck möglich: ${tri.valid ? "JA" : "NEIN"}
+    `;
+
+    // 4) ID-Daten anzeigen
+    document.getElementById("id-status").innerHTML = `
+ID:       ${id.id}  
+Axis:     ${id.axis}  
+Instance: ${id.instance}  
+Base:     ${id.base}
     `;
   </script>
 </body>
