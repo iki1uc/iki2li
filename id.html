@@ -1,46 +1,25 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>ID‑Ansicht</title>
-</head>
-<body>
-  <h1>ID‑Ansicht</h1>
+<script type="module">
+  import { idState } from "./kiq/id-state.js";
+  import { trianglePrep } from "./kiq/triangle-prep.js";
+  import { identVector } from "./kiq/ident-vector.js";
 
-  <h2>ID‑Daten</h2>
-  <div id="id-status" style="font-family:monospace;"></div>
+  const id = idState();
+  const tri = trianglePrep();
+  const ident = identVector();
 
-  <hr>
-
-  <h2>Dreieck‑Winkel</h2>
-  <div id="triangle-status" style="font-family:monospace;"></div>
-
-  <script type="module">
-    import { idState } from "./kiq/id-state.js";
-    import { trianglePrep } from "./kiq/triangle-prep.js";
-
-    // 1) ID-Daten holen
-    const id = idState();
-
-    // 2) Winkel holen
-    const tri = trianglePrep();
-
-    // 3) ID anzeigen
-    document.getElementById("id-status").innerHTML = `
+  document.getElementById("id-status").innerHTML = `
 ID:       ${id.id}
 Axis:     ${id.axis}
 Instance: ${id.instance}
 Base:     ${id.base}
-    `;
+IDENT‑Vektor: [${ident.vector[0]}, ${ident.vector[1]}]
+  `;
 
-    // 4) Winkel anzeigen
-    document.getElementById("triangle-status").innerHTML = `
+  document.getElementById("triangle-status").innerHTML = `
 Winkel A: ${tri.w1}°
 Winkel B: ${tri.w2}°
 Summe:    ${tri.sum}°
 Dreieck:  ${tri.valid ? "JA" : "NEIN"}
-    `;
-  </script>
-</body>
-</html>
-
+IDENT‑Vektor: [${ident.vector[0]}, ${ident.vector[1]}]
+  `;
+</script>
