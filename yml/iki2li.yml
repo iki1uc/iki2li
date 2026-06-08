@@ -1,1 +1,7 @@
+module: iki2li
+share: 0.33
+role: IDENTITAET
+fragment: "v_iki2li / 3"
+operator: "1 - v_iki2li"
+bind: "Seiten-Seil"
 
