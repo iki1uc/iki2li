@@ -1,1 +1,137 @@
+P1 ─────► P2
+ ▲        │
+ │        ▼
+ P3 ◄─────┘
 
+Vektoren:
+v12 = P2 - P1
+v23 = P3 - P2
+v31 = P1 - P3
+
+Winkel:
+A = angle(v12, v23)
+B = angle(v23, v31)
+
+Dreieck gültig?
+A + B < 180°
+
+A + B < 180  →  JA  →  valid = 1
+A + B ≥ 180  →  NEIN →  valid = 0
+
+ID-Raum:
+ID = (id, base, axis, instance)
+
+Schaltung S2:
+ID != "UNBEKANNT" ?
+JA → ID_VALID = 1
+NEIN → ID_VALID = 0
+
+IDENT-Vektor:
+IDENT = ( base , A + B )
+
+→ verbindet Identität + Geometrie
+→ ist der 3. Punkt im System-Dreieck
+
+S3 = S1 ∧ S2
+
+                 ┌───────────────┐
+                 │  Winkel A,B   │
+                 └───────┬───────┘
+                         ▼
+                A + B < 180 ?
+                 /           \
+               JA             NEIN
+               |               |
+         valid = 1        valid = 0
+               |               |
+               ▼               ▼
+         ID != UNBEKANNT ?     ID != UNBEKANNT ?
+            /        \            /         \
+          JA          NEIN      JA          NEIN
+          |            |        |            |
+          ▼            ▼        ▼            ▼
+   STABIL        HALB-KAND.   WARNUNG     UNBESTIMMT
+        (Geometrie)
+        Winkel A,B
+             ▲
+             │
+             │
+(ID) ◄──── IDENT ────► (Dreieck)
+Base,Axis,Instance     valid/invalid
+STATUS =
+  STABIL        wenn (A+B < 180) ∧ (ID gültig)
+  WARNUNG       wenn (A+B ≥ 180) ∧ (ID gültig)
+  HALB-KAND.    wenn (A+B < 180) ∧ (ID ungültig)
+  UNBESTIMMT    sonst
+┌──────────────────────────────────────────────────────────┐
+│                      GEOMETRIE-EBENE                     │
+└──────────────────────────────────────────────────────────┘
+
+   P1 ●───────────────● P2
+      ▲               │
+      │               ▼
+      ● P3 ◄──────────┘
+
+Vektoren:
+  v12 = P2 - P1
+  v23 = P3 - P2
+  v31 = P1 - P3
+
+Winkel:
+  A = angle(v12, v23)
+  B = angle(v23, v31)
+
+Schaltung S1:
+  (A + B < 180°) ?  →  valid = 1 : 0
+┌──────────────────────────────────────────────────────────┐
+│                     IDENTITÄTS-EBENE                     │
+└──────────────────────────────────────────────────────────┘
+
+ID-Daten:
+  ID       = string
+  base     = integer
+  axis     = integer
+  instance = integer
+
+Schaltung S2:
+  (ID != "UNBEKANNT") ?  →  ID_VALID = 1 : 0
+┌──────────────────────────────────────────────────────────┐
+│                     VERBUND-EBENE                        │
+└──────────────────────────────────────────────────────────┘
+
+IDENT-Vektor:
+  IDENT = ( base , A + B )
+
+Master-Schaltung S3:
+  S3 = S1 ∧ S2
+                         ┌───────────────┐
+                         │  Winkel A,B   │
+                         └───────┬───────┘
+                                 ▼
+                        A + B < 180 ?
+                         /           \
+                       JA             NEIN
+                       |               |
+                 valid = 1        valid = 0
+                       |               |
+                       ▼               ▼
+                 ID != UNBEKANNT ?     ID != UNBEKANNT ?
+                    /        \            /         \
+                  JA          NEIN      JA          NEIN
+                  |            |        |            |
+                  ▼            ▼        ▼            ▼
+           ┌──────────┐  ┌──────────┐ ┌──────────┐ ┌────────────┐
+           │  STABIL   │  │  HALB    │ │ WARNUNG  │ │ UNBESTIMMT │
+           └──────────┘  └──────────┘ └──────────┘ └────────────┘
+                 (Geometrie)
+                 Winkel A,B
+                      ▲
+                      │
+                      │
+(ID) ◄────────── IDENT ──────────► (Dreieck)
+base,axis,instance                 valid/invalid
+STATUS =
+  STABIL        wenn (A+B < 180) ∧ (ID gültig)
+  WARNUNG       wenn (A+B ≥ 180) ∧ (ID gültig)
+  HALB-KAND.    wenn (A+B < 180) ∧ (ID ungültig)
+  UNBESTIMMT    sonst
