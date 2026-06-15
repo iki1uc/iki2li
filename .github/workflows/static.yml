@@ -1,3 +1,13 @@
+
+Search within code
+ 
+‎.github/workflows/static.yml‎
++7
+-6
+Lines changed: 7 additions & 6 deletions
+Original file line number	Diff line number	Diff line change
+@@ -1,16 +1,17 @@
+name: iki1uc-Sensorik
 name: respo-${{ github.repository }}
 
 on:
@@ -6,12 +16,21 @@ on:
     types: [completed]
 
 jobs:
+  sensorik:
   modul_ok:
     runs-on: ubuntu-latest
-
     steps:
+      - name: iki1uc empfängt Kern-ID
+        run: echo "iki1uc: Kern-ID empfangen"
       - name: respo empfängt OP Kern-ID
         run: echo "respo: OP Kern-ID empfangen – Modul = ${{ github.repository }}"
 
+      - name: iki1uc OK + VERIFY
+        run: echo "iki1uc: OK – VERIFY – Dienst aktiv"
       - name: respo OK + VERIFY
         run: echo "respo: OK – VERIFY – Dienst aktiv – Modul = ${{ github.repository }}"
+0 commit comments
+Comments
+0
+ (0)
+Comment
