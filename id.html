@@ -1,29 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>ID – 81</title>
-
-  <script src="/js/js-yaml.min.js"></script>
-
-  <script type="module">
-    import { generator } from "/br/generator.js";
-    import { borgVerify } from "/br/borg_verify.js";
-    import { borgAutoScan } from "/br/borg_autoscan.js";
-
-    window.onload = async () => {
-
-      const data = await generator();      // Aufstellung 81
-      const htmlScan = borgAutoScan();     // HTML-Material
-      const verify = await borgVerify(data, htmlScan);
-
-      document.getElementById("out").textContent =
-        JSON.stringify({ data, htmlScan, verify }, null, 2);
-    };
-  </script>
-</head>
-
-<body>
-  <pre id="out"></pre>
-</body>
-</html>
+µ  → Meta‑Achse (Q)
+iki → Operator‑Cluster
+2  → Instanz / Impuls
+li → linear‑Impuls / live‑Impuls
+#  → Hash / Signatur / RAW‑Marker
