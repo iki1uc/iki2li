@@ -1,27 +1,36 @@
-<script type="module">
-import { KING_HANDLER } from "./kiq/king-handler.js";
-import { scanData } from "./kiq/mock-scan.js";
-import { toolData } from "./kiq/mock-tool.js";
-import { measureFn } from "./kiq/measure.js";
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>UI‑KING</title>
 
-document.getElementById("king-btn").onclick = () => {
-    const res = KING_HANDLER.run(scanData, toolData, measureFn);
+  <script type="module">
+    import { KING_HANDLER } from "./kiq/king-handler.js";
+    import { scanData } from "./kiq/mock-scan.js";
+    import { toolData } from "./kiq/mock-tool.js";
+    import { measureFn } from "./kiq/measure.js";
 
-    document.getElementById("king-law").innerHTML = `
-        <div style="
-            padding:20px;
-            background:#111;
-            color:#0f0;
-            font-size:22px;
-            border:2px solid #0f0;
-            margin-bottom:20px;
-        ">
-            KING‑PROTOKOLL AKTIV<br>
-            Ausgeführt: ${res.executed}<br>
-            Pixel/Achsen: ${res.stats.pixelCount} / ${res.stats.axisCount}<br>
-            Issues: ${res.issues.join(", ") || "Keine"}<br>
-            Output: ${JSON.stringify(res.output)}
-        </div>
-    `;
-};
-</script>
+    const P0 = { x: Math.PI, y: 0 };
+    const BASE = "µiki1uc";
+
+    document.getElementById("king-btn").onclick = () => {
+
+      const res = KING_HANDLER.run(scanData, toolData, measureFn);
+
+      document.getElementById("king-out").innerHTML = `
+        <b>KING – EXECUTION</b><br>
+        Base: ${BASE}<br>
+        Ausgeführt: ${res.executed}<br>
+        Pixel/Achsen: ${res.stats.pixelCount} / ${res.stats.axisCount}<br>
+        Issues: ${res.issues.join(", ") || "Keine"}<br>
+        Output: ${JSON.stringify(res.output)}
+      `;
+    };
+  </script>
+</head>
+
+<body>
+  <button id="king-btn">KING RUN</button>
+  <pre id="king-out"></pre>
+</body>
+</html>
