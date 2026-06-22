@@ -1,26 +1,41 @@
-<script type="module">
-import { VECTOR_SCANNER } from "./kiq/vector-scanner.js";
-import { scanData } from "./kiq/mock-scan.js";
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>UI‑SCANNER</title>
 
-const ui = document.querySelector('[data-iki="scan:result"]');
+  <script type="module">
+    import { VECTOR_SCANNER } from "./kiq/vector-scanner.js";
+    import { scanData } from "./kiq/mock-scan.js";
 
-document.getElementById("UI-SCANNER").onclick = () => {
-    // Beispiel: 3 Punkte aus dem Scan
-    const p1 = scanData.points[0];
-    const p2 = scanData.points[1];
-    const p3 = scanData.points[2];
+    const P0 = { x: Math.PI, y: 0 };   // 0‑Punkt (PI)
+    const BASE = "µiki1uc";            // Basis für alle 3
 
-    const vA = VECTOR_SCANNER.toVector(p1, p2);
-    const vB = VECTOR_SCANNER.toVector(p2, p3);
-    const vC = VECTOR_SCANNER.toVector(p3, p1);
+    document.getElementById("scan-btn").onclick = () => {
 
-    const triangle = VECTOR_SCANNER.triangle(vA, vB, vC);
+      const p1 = scanData.points[0];
+      const p2 = scanData.points[1];
+      const p3 = scanData.points[2];
 
-    ui.innerHTML = `
-        <b>Vektoring aktiv</b><br>
-        AB: ${triangle.AB.toFixed(2)}°<br>
-        BC: ${triangle.BC.toFixed(2)}°<br>
-        CA: ${triangle.CA.toFixed(2)}°
-    `;
-};
-</script>
+      const vA = VECTOR_SCANNER.toVector(P0, p1);
+      const vB = VECTOR_SCANNER.toVector(P0, p2);
+      const vC = VECTOR_SCANNER.toVector(P0, p3);
+
+      const tri = VECTOR_SCANNER.triangle(vA, vB, vC);
+
+      document.getElementById("scan-out").innerHTML = `
+        <b>SCANNER – RAW</b><br>
+        Base: ${BASE}<br>
+        A: ${tri.AB.toFixed(2)}°<br>
+        B: ${tri.BC.toFixed(2)}°<br>
+        C: ${tri.CA.toFixed(2)}°
+      `;
+    };
+  </script>
+</head>
+
+<body>
+  <button id="scan-btn">SCAN</button>
+  <pre id="scan-out"></pre>
+</body>
+</html>
