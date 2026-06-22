@@ -1,26 +1,35 @@
-<script type="module">
-import { OFFICER_HANDLER } from "./kiq/officer-handler.js";
-import { scanData } from "./kiq/mock-scan.js";
-import { toolData } from "./kiq/mock-tool.js";
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>UI‑OFFICER</title>
 
-document.getElementById("officer-btn").onclick = () => {
-    const res = OFFICER_HANDLER.check(scanData, toolData);
+  <script type="module">
+    import { OFFICER_HANDLER } from "./kiq/officer-handler.js";
+    import { scanData } from "./kiq/mock-scan.js";
+    import { toolData } from "./kiq/mock-tool.js";
 
-    document.getElementById("officer-law").innerHTML = `
-        <div style="
-            padding:20px;
-            background:#000;
-            color:#0ff;
-            font-size:20px;
-            border:2px solid #0ff;
-            margin-bottom:20px;
-        ">
-            OFFICER‑PROTOKOLL<br>
-            Fusion komplett: ${res.fusion.complete}<br>
-            Validator gültig: ${res.validation.valid}<br>
-            Issues: ${res.validation.issues.join(", ") || "Keine"}<br>
-            Pixel/Achsen: ${res.validation.stats.pixelCount} / ${res.validation.stats.axisCount}
-        </div>
-    `;
-};
-</script>
+    const P0 = { x: Math.PI, y: 0 };
+    const BASE = "µiki1uc";
+
+    document.getElementById("officer-btn").onclick = () => {
+
+      const res = OFFICER_HANDLER.check(scanData, toolData);
+
+      document.getElementById("officer-out").innerHTML = `
+        <b>OFFICER – VALIDATION</b><br>
+        Base: ${BASE}<br>
+        Fusion: ${res.fusion.complete}<br>
+        Valid: ${res.validation.valid}<br>
+        Issues: ${res.validation.issues.join(", ") || "Keine"}<br>
+        Pixel/Achsen: ${res.validation.stats.pixelCount} / ${res.validation.stats.axisCount}
+      `;
+    };
+  </script>
+</head>
+
+<body>
+  <button id="officer-btn">VALIDIEREN</button>
+  <pre id="officer-out"></pre>
+</body>
+</html>
