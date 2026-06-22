@@ -11,14 +11,56 @@
     import { borgVerify } from "/br/borg_verify.js";
     import { borgAutoScan } from "/br/borg_autoscan.js";
 
+    // --- iki2li: TEMP-Signatur ---
+    const iki2li = {
+      signature: "µikiµ2µli#",
+      mode: "temp",
+      role: "impulse",
+      axis: "Q",
+      gen: 2
+    };
+
+    // --- START-BLOCK (wie du wolltest) ---
+    const START = {
+      paths: {
+        raw: "./RAW/",
+        yml: "./YML/",
+        core: "./comet/item_core.json"
+      },
+      assign: {
+        op: "enabled",
+        iki1uc: "enabled",
+        iki7uc: "enabled",
+        iki2li: "enabled"
+      },
+      run: "first"
+    };
+
+    // --- 3-CUBE META MOVE ---
+    const META = {
+      A: "cube_left",
+      B: "cube_right",
+      C: "cube_temp_center",   // temporärer 3. Würfel
+      mode: "meta-move"
+    };
+
     window.onload = async () => {
 
       const data = await generator();      // Aufstellung 81(1)
       const htmlScan = borgAutoScan();     // HTML-Material
       const verify = await borgVerify(data, htmlScan);
 
+      const out = {
+        start: START,
+        iki2li: iki2li,
+        meta: META,
+        data: data,
+        htmlScan: htmlScan,
+        verify: verify
+      };
+
       document.getElementById("out").textContent =
-        JSON.stringify({ data, htmlScan, verify }, null, 2);
+        JSON.stringify(out, null, 2);
     };
   </script>
 </head>
