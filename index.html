@@ -1,73 +1,96 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>INDEX – 81(1)</title>
+  <title>iki2li – CORE UI</title>
 
-  <script src="/js/js-yaml.min.js"></script>
-
+  <!-- CORE ENGINE -->
   <script type="module" src="./iki2li.js"></script>
 
-  <script type="module">
-    import { generator } from "/br/generator.js";
-    import { borgVerify } from "/br/borg_verify.js";
-    import { borgAutoScan } from "/br/borg_autoscan.js";
+  <style>
+    body {
+      background:#000;
+      color:#0ff;
+      font-family:Consolas, monospace;
+      padding:20px;
+    }
+    h1 { margin-bottom:10px; }
+    button {
+      background:#0ff;
+      color:#000;
+      border:none;
+      padding:10px 20px;
+      font-weight:bold;
+      cursor:pointer;
+      margin-right:10px;
+    }
+    pre {
+      background:#111;
+      padding:20px;
+      border:2px solid #0ff;
+      border-radius:10px;
+      margin-top:20px;
+      overflow:auto;
+    }
+  </style>
 
-    // --- iki2li: TEMP-Signatur ---
-    const iki2li = {
-      signature: "µikiµ2µli#",
-      mode: "temp",
-      role: "impulse",
-      axis: "Q",
-      gen: 2
-    };
-
-    // --- START-BLOCK (wie du wolltest) ---
-    const START = {
-      paths: {
-        raw: "./RAW/",
-        yml: "./YML/",
-        core: "./comet/item_core.json"
-      },
-      assign: {
-        op: "enabled",
-        iki1uc: "enabled",
-        iki7uc: "enabled",
-        iki2li: "enabled"
-      },
-      run: "first"
-    };
-
-    // --- 3-CUBE META MOVE ---
-    const META = {
-      A: "cube_left",
-      B: "cube_right",
-      C: "cube_temp_center",   // temporärer 3. Würfel
-      mode: "meta-move"
-    };
-
-    window.onload = async () => {
-
-      const data = await generator();      // Aufstellung 81(1)
-      const htmlScan = borgAutoScan();     // HTML-Material
-      const verify = await borgVerify(data, htmlScan);
-
-      const out = {
-        start: START,
-        iki2li: iki2li,
-        meta: META,
-        data: data,
-        htmlScan: htmlScan,
-        verify: verify
-      };
-
-      document.getElementById("out").textContent =
-        JSON.stringify(out, null, 2);
-    };
-  </script>
 </head>
 
 <body>
-  <pre id="out"></pre>
+
+  <h1>iki2li – CORE UI</h1>
+
+  <button id="run-core">RUN CORE</button>
+  <button id="run-engine">RUN ENGINE</button>
+  <button id="run-matrix">RUN MATRIX</button>
+  <button id="run-state">RUN STATE</button>
+  <button id="run-phase">RUN PHASE</button>
+  <button id="run-profiles">RUN PROFILES</button>
+  <button id="run-log">RUN LOG</button>
+
+  <pre id="output"></pre>
+
+  <script type="module">
+    import iki2li from "./iki2li.js";
+
+    const out = document.getElementById("output");
+
+    function show(data) {
+      out.textContent = JSON.stringify(data, null, 2);
+    }
+
+    document.getElementById("run-core").onclick = () => {
+      show({
+        core: iki2li.core || "no core",
+        version: iki2li.version || "unknown",
+        ident: iki2li.ident || "none"
+      });
+    };
+
+    document.getElementById("run-engine").onclick = () => {
+      show(iki2li.engine || { error:"engine missing" });
+    };
+
+    document.getElementById("run-matrix").onclick = () => {
+      show(iki2li.matrix || { error:"matrix missing" });
+    };
+
+    document.getElementById("run-state").onclick = () => {
+      show(iki2li.state || { error:"state missing" });
+    };
+
+    document.getElementById("run-phase").onclick = () => {
+      show(iki2li.phase || { error:"phase missing" });
+    };
+
+    document.getElementById("run-profiles").onclick = () => {
+      show(iki2li.profiles || { error:"profiles missing" });
+    };
+
+    document.getElementById("run-log").onclick = () => {
+      show(iki2li.log || { error:"log missing" });
+    };
+  </script>
+
 </body>
 </html>
