@@ -4,28 +4,6 @@
   <meta charset="utf-8">
   <title>UI‑KING</title>
 
-  <script type="module">
-    import { KING_HANDLER } from "./kiq/king-handler.js";
-    import { scanData } from "./kiq/mock-scan.js";
-    import { toolData } from "./kiq/mock-tool.js";
-    import { measureFn } from "./kiq/measure.js";
-
-    const P0 = { x: Math.PI, y: 0 };
-    const BASE = "µiki1uc";
-
-    document.getElementById("king-btn").onclick = () => {
-
-      const res = KING_HANDLER.run(scanData, toolData, measureFn);
-
-      document.getElementById("king-out").innerHTML = `
-        <b>KING – EXECUTION</b><br>
-        Base: ${BASE}<br>
-        Ausgeführt: ${res.executed}<br>
-        Pixel/Achsen: ${res.stats.pixelCount} / ${res.stats.axisCount}<br>
-        Issues: ${res.issues.join(", ") || "Keine"}<br>
-        Output: ${JSON.stringify(res.output)}
-      `;
-    };
   </script>
 </head>
 
@@ -34,3 +12,4 @@
   <pre id="king-out"></pre>
 </body>
 </html>
+</script>
