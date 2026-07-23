@@ -1,0 +1,33 @@
+{
+  "odamirt": {
+    "languages": ["DE", "EN", "TR"],
+    "story": "Der verlorene Stern",
+    "timelines": [
+      "Origin",
+      "Encounter",
+      "Conflict",
+      "Transformation"
+    ],
+    "roles": {
+      "scientists": ["Astrophysicist", "Reality-Analyst"],
+      "artists": ["Dream-Painter", "Sound-Architect"]
+    },
+    "matrix3x3x3": {
+      "DE": [
+        ["A1","A2","A3"],
+        ["B1","B2","B3"],
+        ["C1","C2","C3"]
+      ],
+      "EN": [
+        ["D1","D2","D3"],
+        ["E1","E2","E3"],
+        ["F1","F2","F3"]
+      ],
+      "TR": [
+        ["G1","G2","G3"],
+        ["H1","H2","H3"],
+        ["I1","I2","I3"]
+      ]
+    }
+  }
+}
